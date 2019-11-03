@@ -2,11 +2,19 @@ package com.back4app.instagramCloneCursoAndroid;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button botao;
+    private ParseUser usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,69 +23,54 @@ public class MainActivity extends AppCompatActivity {
 
         botao = (Button) findViewById(R.id.btId);
 
-        // Save the current Installation to Back4App
-        // ParseInstallation.getCurrentInstallation().saveInBackground();
+        //Cadastro de usuários
+        usuario = new ParseUser();
+        usuario.setUsername("jamiltonDamasceno");
+        usuario.setPassword("123456");
+        usuario.setEmail("jamiltoncursos@gmail.com");
 
-        /*
-        ParseObject pontuacao = new ParseObject("Pontuacao");
-        pontuacao.put("nome","Mario");
-        pontuacao.put("pontos",800);
-
-        pontuacao.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.i("Salvo","Salvo");
-                }else{
-                    Log.i("Não Salvo","Não Salvo");
-                }
-            }
-        });*/
-
-        /*
-        ParseQuery<ParseObject> consulta = ParseQuery.getQuery("Pontuacao");
-        consulta.getInBackground("uDCygxQ4bY", new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject object, ParseException e) {
-                if (e==null){
-                    object.put("pontos",500);
-                    object.saveInBackground();
-                }else{
-                    Log.i("Erro na consula","Erro na consulta");
-                }
-            }
-        });*/
-
-       /* botao.setOnClickListener(new View.OnClickListener() {
+        botao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ParseQuery<ParseObject> filtro = ParseQuery.getQuery("Pontuacao");
 
-                //filtro.whereGreaterThan("pontos",200);
-                filtro.whereGreaterThanOrEqualTo("pontos",200);
-                filtro.addDescendingOrder("pontos");
-                filtro.setLimit(1);
-
-                //Listar os dados
-                filtro.findInBackground(new FindCallback<ParseObject>() {
+                /*usuario.signUpInBackground(new SignUpCallback() {
                     @Override
-                    public void done(List<ParseObject> objects, ParseException e) {
-                        if (e == null){
-                            //Toast.makeText(getApplicationContext(),"Sucesso" + objects.size(),Toast.LENGTH_LONG).show();
-                            Log.i("Listar Dados","Sucesso" + objects.size());
-                            for(ParseObject object : objects){
-                                Log.i("Listar Dados","Objetos" + object.get("nome") + object.get("pontos")  );
-                            }
-
-                        }else{
-                            //Toast.makeText(getApplicationContext(),"Erro" + objects.size(),Toast.LENGTH_LONG).show();
-                            Log.i("Listar Dados", "Erro" + e.getMessage());
+                    public void done(ParseException e) {
+                        if (e==null){
+                            Log.i("cadastroUsuario","Sucesso ao cadastrar Usuario");
+                        } else {
+                            Log.i("cadastroUsuario", "Erro ao cadastrar Usuario" + e.getMessage());
                         }
                     }
-                });
+                });*/
+                /*Verificar usuário logado*/
+                //deslogar
+                /*ParseUser.logOut();
 
+                if (ParseUser.getCurrentUser() != null){
+                    Log.i("Login Usuario","Usuario está Logado");
+                } else {
+                    Log.i("Login Usuario", "Usuario não está logado");
+                }*/
+
+                /*Fazer login do usuário*/
+                ParseUser.logInInBackground("jamiltonDamasceno", "123456", new LogInCallback() {
+                    @Override
+                    public void done(ParseUser user, ParseException e) {
+                        if (ParseUser.getCurrentUser() != null){
+                            Log.i("Login Usuario","Login realizado");
+                        } else {
+                            Log.i("Login Usuario", "Erro ao fazer login");
+                        }
+
+                    }
+                });
             }
-        });*/
+        });
+
+
+
+
 
     }
 
