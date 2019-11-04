@@ -1,4 +1,4 @@
-package com.back4app.instagramCloneCursoAndroid;
+package com.back4app.instagramCloneCursoAndroid.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.back4app.instagramCloneCursoAndroid.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
